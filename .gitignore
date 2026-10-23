@@ -1,0 +1,4 @@
+# Tus datos personales del Excel: nunca se publican
+data/
+*.xlsx
+__pycache__/
