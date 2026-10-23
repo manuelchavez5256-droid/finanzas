@@ -102,7 +102,13 @@ function pantallaResumen() {
   const saldo = ingresos.monto - egresos.monto;
   let html = selectorMes();
 
-  if (!store.movimientos().length && !localStorage.getItem('finanzas.importacionOmitida')) {
+  if (!store.movimientos().length && sync.configurado() && !sync.usuarioActual()) {
+    html += `
+      <div class="banner">
+        <p><strong>¿Ya tienes cuenta?</strong> Inicia sesión para traer tus movimientos guardados en la nube.</p>
+        <div class="botones"><a class="boton primario" href="#/ajustes">Iniciar sesión</a></div>
+      </div>`;
+  } else if (!store.movimientos().length && !localStorage.getItem('finanzas.importacionOmitida')) {
     html += `
       <div class="banner">
         <p><strong>¿Vienes del Excel?</strong> Puedes importar todos tus movimientos anteriores para no empezar de cero.</p>
@@ -592,7 +598,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 store.suscribir(dibujar);
 sync.alCambiarEstado(() => {
   pintarEstadoSync();
-  if (rutaActual() === 'ajustes') dibujar();
+  if (rutaActual() === 'ajustes' || !store.movimientos().length) dibujar();
 });
 window.addEventListener('hashchange', () => {
   dibujar();

@@ -181,6 +181,7 @@ svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width:
   cursor: pointer;
 }
 .boton.primario { background: var(--marca); color: var(--sobre-marca); border-color: transparent; }
+a.boton { text-decoration: none; display: inline-block; }
 .boton.peligro { background: transparent; color: var(--mal); }
 .boton:disabled { opacity: 0.5; cursor: default; }
 .botones { display: flex; flex-wrap: wrap; gap: 8px; }
